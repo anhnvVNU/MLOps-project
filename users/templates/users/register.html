@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="sign_up">
+    <div class="welcome">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="logo">
+        </a>
+        <div class="slogan">
+            <h3 class="first">Mua sắm thả ga</h3>
+            <h3 class="second">Về nhà đỡ tiếc</h3>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1 class="title">Đăng ký</h1>
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.username }}
+            {{ form.email }}
+            {{ form.password1 }}
+            {{ form.password2 }}
+            <button class="submit" type="submit">Đăng ký</button>
+        </form>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="exist_account">
+            <p>Bạn đã có tài khoản? <a href="{% url 'login' %}">Đăng nhập</a></p>
+        </div>
+    </div>
+    <a class="close_sign_up" href="{% url 'home' %}">
+        <img src="{% static 'images/close_button.png' %}" alt="Close Button">
+    </a>
+</div>
+</body>
+</html>

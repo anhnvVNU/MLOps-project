@@ -1,0 +1,21 @@
+name: djangofrontend
+channels:
+  - defaults
+dependencies:
+  - pip=23.3.1
+  - python=3.9.18
+  - pip:
+    - django==4.2
+    - asgiref==3.8.1
+    - sqlparse==0.4.4
+    - typing_extensions==4.10.0
+    - tzdata==2024.1
+    - whitenoise==6.6.0
+    - crispy-bootstrap4
+    - djangorestframework
+    - django-cors-headers
+    - openai
+    - Pillow
+    - python-dotenv
+    - psycopg2-binary
+    - dj_database_url

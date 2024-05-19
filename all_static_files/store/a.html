@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Title Here</title>
+    <!-- Chèn CSS từ file style.css -->
+    <link href="./style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!-- Các phần tử HTML khác trong trang của bạn -->
+    <div id="message-display">
+        <!-- Tin nhắn sẽ được cập nhật ở đây -->
+    </div>
+    <form id="message-form">
+        {% csrf_token %}
+        <textarea id="message-input" rows="4" cols="50" placeholder="Type your message..."></textarea>
+        <button type="submit" id="send-message-btn">Send</button>
+    </form>
+
+    <!-- Các kịch bản JavaScript khác của bạn có thể được chèn ở đây -->
+</body>
+</html>

@@ -1,0 +1,14 @@
+
+#message-display {
+    position: fixed;  /* Vị trí của phần tử sẽ được cố định trên màn hình */
+    bottom: 20px;  /* Cách lề dưới của màn hình */
+    right: 200px;  /* Cách lề phải của màn hình */
+    background-color: #18e945;  /* Màu nền */
+    padding: 10px;  /* Khoảng cách từ nội dung đến viền của phần tử */
+    border: 1px solid #ccc;  /* Viền */
+    border-radius: 5px;  /* Bo tròn góc */
+    max-width: 300px;  /* Chiều rộng tối đa của phần tử */
+    overflow-y: auto;  /* Hiển thị thanh cuộn khi nội dung vượt quá kích thước */
+    max-height: 200px;  /* Chiều cao tối đa của phần tử */
+    z-index: 9999;  /* Số thứ tự độ ưu tiên hiển thị, cao nhất là 9999 */
+}

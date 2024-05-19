@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-content padding-y bg">
+
+    <div class="container">
+        <!-- ============================ COMPONENT 1 ================================= -->
+        <div class="card">
+            <div class="row no-gutters">
+                <aside class="col-md-6">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap">
+                            <a href="#"><img src="{{ single_product.images.url }}" /></a>
+                        </div>
+                        <!-- img-big-wrap.// -->
+                    </article>
+                    <!-- gallery-wrap .end// -->
+                </aside>
+                <main class="col-md-6 border-left">
+                    <form action="{% url 'add_cart' single_product.id %}" method="POST">
+                        {% csrf_token %}
+                        <article class="content-body">
+                            <h2 class="title">{{ single_product.product_name }}</h2>
+                            <div class="mb-3">
+                                <var class="price h4">${{ single_product.price }}</var>
+                            </div>
+                            <p>{{ single_product.description }}</p>
+                            <hr />
+
+                            <!-- row.// -->
+                            <hr />
+                            {% if single_product.stock > 0 %} {% if in_cart %}
+                            <button type="submit" class="btn btn-success">
+                                <span class="text">Add to cart</span>
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <a href="{% url 'cart' %}" class="btn btn-outline-primary">
+                                <span class="text">Show cart</span>
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            {% else %}
+                            <button type="submit" class="btn btn-warning">
+                                <span class="text">Add to cart</span>
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                            {% endif %} {% else %}
+                            <h5 class="text-danger">Out of Stock</h5>
+                            {% endif %}
+                        </article>
+                        <!-- product-info-aside .// -->
+                    </form>
+                </main>
+                <!-- col.// -->
+            </div>
+            <!-- row.// -->
+        </div>
+        <!-- card.// -->
+        <!-- ============================ COMPONENT 1 END .// ================================= -->
+        <br />
+        <div class="row">
+            <div class="col-md-9">
+                <form action="{% url 'submit_review' single_product.id %}" method="POST">
+                    {% csrf_token %}
+                    <h5>Write your review</h5>
+                    <div>
+                        {% include "includes/alerts.html" %}
+                        <label>How do you rate this product?</label>
+                        <br>
+                        <div class="rate">
+                            <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10"
+                                title="5"></label>
+                            <input type="radio" name="rating" id="rating9" value="4.5" required /><label for="rating9"
+                                title="4.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating8" value="4" required /><label for="rating8"
+                                title="4"></label>
+                            <input type="radio" name="rating" id="rating7" value="3.5" required /><label for="rating7"
+                                title="3.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating6" value="3" required /><label for="rating6"
+                                title="3"></label>
+                            <input type="radio" name="rating" id="rating5" value="2.5" required /><label for="rating5"
+                                title="2.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating4" value="2" required /><label for="rating4"
+                                title="2"></label>
+                            <input type="radio" name="rating" id="rating3" value="1.5" required /><label for="rating3"
+                                title="1.5" class="half"></label>
+                            <input type="radio" name="rating" id="rating2" value="1" required /><label for="rating2"
+                                title="1"></label>
+                            <input type="radio" name="rating" id="rating1" value="0.5" required /><label for="rating1"
+                                title="0.5" class="half"></label>
+                        </div>
+                        <br>
+                        Review title:
+                        <input type="text" class="form-control" name="subject">
+                        <br>
+                        Review
+                        <textarea name="review" rows="4" class="form-control"></textarea>
+                        <br>
+
+                        {% if user.is_authenticated %}
+                        <!-- {% if orderproduct %} -->
+                        <input type="submit" value="Submit Review" class="btn btn-warning">
+                        <!-- {% else %}
+                            <p>You must purchase this product to post a review.</p>
+                            {% endif %} -->
+                        {% else %}
+                        <p>You must be logged in to post a review. <span><a href="{% url 'login' %}">Login
+                                    now</a></span></p>
+                        {% endif %}
+                    </div>
+                </form>
+                <br>
+                <header class="section-heading">
+                    <h3>Customer Reviews</h3>
+                </header>
+                {% for review in reviews %}
+                <article class="box mb-3">
+                    <div class="icontext w-100">
+                        <div class="text">
+                            <span class="date text-muted float-md-right">{{ review.updated_at }}</span>
+                            <h6 class="mb-1">{{ review.user.full_name }}</h6>
+                            <div class="rating-star">
+                                <span>
+                                    <i class="fa fa-star{% if review.rating == 0.5 %}-half-o{% elif review.rating < 1 %}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 1.5 %}-half-o{% elif review.rating < 2 %}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 2.5 %}-half-o{% elif review.rating < 3 %}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 3.5 %}-half-o{% elif review.rating < 4 %}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                    <i class="fa fa-star{% if review.rating == 4.5 %}-half-o{% elif review.rating < 5 %}-o {% endif %}"
+                                        aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- icontext.// -->
+                    <div class="mt-3">
+                        <h6>{{ review.subject }}</h6>
+                        <p>{{ review.review }}</p>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+            <!-- col.// -->
+        </div>
+        <!-- row.// -->
+    </div>
+    <!-- Form để nhập tin nhắn -->
+
+
+
+    <!-- Phần hiển thị tin nhắn -->
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Your Title Here</title>
+        <!-- Chèn CSS từ file style.css -->
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .chat-box {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+            background: white;
+        }
+        .chat-header {
+            background: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .chat-header h5 {
+            margin: 0;
+        }
+        .chat-body {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+        .chat-message {
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            max-width: 80%;
+        }
+        .chat-message.user {
+            background: #007bff;
+            color: white;
+            align-self: flex-end;
+        }
+        .chat-message.bot {
+            background: #f1f1f1;
+            align-self: flex-start;
+        }
+        .chat-footer {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+        }
+        .chat-footer input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .chat-footer button {
+            background: #007bff;
+            border: none;
+            color: white;
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    </head>
+     <!-- Chat Box -->
+     <div class="chat-box" id="chat-box">
+        <div class="chat-header">
+            <h5>Chat</h5>
+            <button id="close-chat" class="btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-chat" class="btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Chat Button -->
+    <button id="open-chat" class="btn btn-primary" style="position: fixed; bottom: 20px; right: 20px; border-radius: 50%; width: 60px; height: 60px;"><i class="fas fa-comments"></i></button>
+
+    <script>
+        document.getElementById('open-chat').onclick = function() {
+            document.getElementById('chat-box').style.display = 'flex';
+            this.style.display = 'none';
+        };
+
+        document.getElementById('close-chat').onclick = function() {
+            document.getElementById('chat-box').style.display = 'none';
+            document.getElementById('open-chat').style.display = 'block';
+        };
+
+        document.getElementById('send-chat').onclick = function() {
+            const messageInput = document.getElementById('chat-input');
+            const message = messageInput.value.trim();
+            if (message) {
+                const chatBody = document.getElementById('chat-body');
+                const messageElement = document.createElement('div');
+                messageElement.className = 'chat-message user';
+                messageElement.innerText = message;
+                chatBody.appendChild(messageElement);
+                chatBody.scrollTop = chatBody.scrollHeight;
+                messageInput.value = '';
+
+                // Simulate bot response
+                setTimeout(() => {
+                    const botMessageElement = document.createElement('div');
+                    botMessageElement.className = 'chat-message bot';
+                    botMessageElement.innerText = 'Thank you for your message. We will get back to you soon.';
+                    chatBody.appendChild(botMessageElement);
+                    chatBody.scrollTop = chatBody.scrollHeight;
+                }, 1000);
+            }
+        };
+    </script>
+    <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+{% endblock %}

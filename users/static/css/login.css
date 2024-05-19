@@ -1,0 +1,164 @@
+@font-face {
+    font-family: 'Hepta Slab Light';
+    src: url('../fonts/HeptaSlab-Light.ttf') format("truetype");
+}
+
+@font-face {
+    font-family: 'Hepta Slab Extra Bold';
+    src: url('../fonts/HeptaSlab-ExtraBold.ttf') format("truetype");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.login {
+    position: relative;
+    min-width: 700px;
+    max-width: 50%;
+    height: 400px;
+    margin: 100px auto;
+}
+
+.login .welcome {
+    background-color: rgb(0, 128, 255);
+
+    width: 50%;
+    height: inherit;
+
+    border-radius: 20px 0 0 20px;
+
+    /* This 3 line below are for vertical alignment. */
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+
+    float: left;
+}
+
+.welcome a {
+    margin: 0 auto -25px;
+    cursor: pointer;
+}
+
+.welcome a img {
+    width: 300px;
+}
+
+.welcome .slogan {
+    display: block;
+    unicode-bidi: isolate;
+}
+
+h3 {
+    color: rgb(0, 0, 0);
+    font-family: 'Hepta Slab Light';
+    text-align: center;
+}
+
+.first {
+    font-size: 22px;
+    margin: 40px auto 0;
+}
+
+.second {
+    font-size: 18px;
+    margin: 5px auto 0;
+}
+
+.login .content {
+    background-color: rgb(202, 202, 202);
+
+    width: 50%;
+    height: inherit;
+
+    border-radius: 0 20px 20px 0;
+
+    float: left;
+
+    /* This 3 line below are for vertical alignment. */
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.content .title {
+    font-family: "Hepta Slab Extra Bold";
+    text-transform: uppercase;
+    font-size: 50px;
+    text-align: center;
+    height: 33%;
+    margin: 0 auto -30px;
+
+    /* This 3 line below are for vertical alignment. */
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+form input, button {
+    width: 80%;
+    height: 55px;
+    display: block;
+    margin: 10px auto 10px;
+    border: none;
+    border-radius: 10px;
+    text-indent: 8px;
+    font-size: 15px;
+}
+
+form input::placeholder {
+    color:#c1c1c1;
+    text-indent: 8px;
+}
+
+form input:focus {
+    outline: none;
+}
+
+form button[type="submit"] {
+    background-color: #00b536;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+
+form button[type="submit"]:hover {
+    background-color: #00d23f;
+}
+
+form button[type="submit"]:active {
+    background-color: #ee2800;
+}
+
+.content .not_account {
+    text-align: center;
+}
+
+.not_account a {
+    text-decoration: none;
+}
+
+.not_account a:hover {
+    color:rgb(0, 140, 255);
+}
+
+.login .close_login {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.close_login img {
+    width: 20px;
+    height: 20px;
+}

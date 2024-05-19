@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="vi">
+
+<head>
+    <title>
+        login
+    </title>
+    <style>
+        form input, button {
+            width: 80%;
+            height: 55px;
+            display: block;
+            margin: 10px auto 10px;
+            border: none;
+            border-radius: 10px;
+            text-indent: 8px;
+            font-size: 15px;
+        }
+
+        .submit {
+            background-color: #00b536;
+            font-size: 20px;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+        }
+    </style>
+    <link rel="stylesheet" href="{%static 'css/login.css'%}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="sign_in">
+        <div class="welcome">
+            <a href="/">
+                <img src="{%static 'images/logo.png'%}" alt="logo">
+            </a>
+            <div class="slogan">
+                <h3 class="first">Đi khắp bốn phương</h3>
+                <h3 class="second">Không đâu bằng nhà</h3>
+            </div>
+        </div>
+
+        <div class="content">
+            <h1 class="title">
+                Đăng nhập
+            </h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{form}}
+                <button class="submit" type="submit"> Đăng Nhập </button>
+            </form>
+
+            <div class="not_account">
+                <p>
+                    Bạn chưa có tài khoản ? <a href="/register">Đăng ký</a>
+                </p>
+            </div>
+        </div>
+        <a class="close_sign_in" href="/">
+            <img src="{%static 'images/close_button.png'%}" alt="Close Button">
+        </a>
+    </div>
+</body>
+
+</html>
