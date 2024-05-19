@@ -1,0 +1,63 @@
+.banner-container0{
+    width: 100%;
+    height: 350px;
+    display: flex;
+    overflow: auto;
+    /* min-height: 100vh; */
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .banner-container {
+    position: relative;
+    width: 1050px; /* Chiều rộng của banner */
+    height: 350px; /* Chiều cao của banner */
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .banner {
+    width: 1050px; /* Chiều rộng tổng cộng của tất cả các ảnh */
+    height: 100%; /* Chiều cao của banner */
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .banner img {
+    width: 1050px; /* Chiều rộng của ảnh */
+    height: 100%; /* Chiều cao của banner */
+    object-fit: cover;
+  }
+
+  .dots-container {
+    display: flex;
+    justify-content: center;
+    margin-top: -30px;
+    z-index: 2;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #bbb;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+
+  .dot.active {
+    background-color: orange;
+  }
+
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: -190px;
+    z-index: 2;
+  }
+
+  .button-img{
+    width: 20px;
+    height: 45px;
+    border-radius: 4px;
+  }

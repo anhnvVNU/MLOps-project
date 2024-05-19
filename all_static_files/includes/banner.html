@@ -1,0 +1,102 @@
+{% load static %}
+  <link href="{% static 'css/manh-banner.css' %}" rel="stylesheet" />
+
+  <div class = "banner-container0">
+    <div class="banner-container">
+      <div class="banner">
+        <!-- <img src="{% static '/images/banners/output/banner1.png' %}" alt="Image 1" /> -->
+        <!-- <img src="{% static '/images/banners/output/banner2.png' %}" alt="Image 2" /> -->
+        <img src="{% static '/images/banners/output/nhasach.png' %}" alt="Image 3" />
+        <img src="{% static '/images/banners/output/nhasach2.png' %}" alt="Image 4" />
+
+      </div>
+    </div>
+
+    <div class="dots-container"></div>
+
+    <div class="navigation">
+      <img alt="left" src="{% static '/images/banners/output/left.png' %}" class="prev-button button-img" style="margin-left: -510px; cursor: pointer;"/>
+      <img alt="right" src="{% static '/images/banners/output/right.png' %}" class="next-button button-img" style="margin-right: -510px; cursor: pointer;"/>
+      <!-- <button class="prev-button">Prev</button>
+      <button class="next-button">Next</button> -->
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var banner = document.querySelector('.banner');
+      var images = banner.getElementsByTagName('img');
+      var dotsContainer = document.querySelector('.dots-container');
+      var prevButton = document.querySelector('.prev-button');
+      var nextButton = document.querySelector('.next-button');
+      var currentIndex = 0;
+
+      // Tạo chấm tròn chỉ số
+      for (var i = 0; i < images.length; i++) {
+        var dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === currentIndex) {
+          dot.classList.add('active');
+        }
+        dotsContainer.appendChild(dot);
+      }
+
+      var dots = dotsContainer.getElementsByClassName('dot');
+
+      // Hàm chuyển đổi banner
+      function changeBanner(index) {
+        banner.style.transform = 'translateX(' + (-index * 1050) + 'px)';
+        for (var i = 0; i < dots.length; i++) {
+          dots[i].classList.remove('active');
+        }
+        dots[index].classList.add('active');
+      }
+
+      // Chuyển đến banner tiếp theo
+      function nextBanner() {
+        currentIndex++;
+        if (currentIndex >= images.length) {
+          currentIndex = 0;
+        }
+        changeBanner(currentIndex);
+      }
+
+      // Chuyển đến banner trước đó
+      function prevBanner() {
+        currentIndex--;
+        if (currentIndex < 0) {
+          currentIndex = images.length - 1;
+        }
+        changeBanner(currentIndex);
+      }
+
+      // Đặt sự kiện click cho nút điều hướng
+      nextButton.addEventListener('click', nextBanner);
+      prevButton.addEventListener('click', prevBanner);
+
+      // Tự động chuyển đổi banner sau mỗi khoảng thời gian
+      var interval = setInterval(nextBanner, 3000); // Chuyển đổi banner sau mỗi 3 giây (3000ms)
+
+
+      // Tạm dừng chuyển đổi banner khi rê chuột vào banner
+      banner.addEventListener('mouseenter', function() {
+        clearInterval(interval);
+      });
+
+    //   dotsContainer.addEventListener('mouseenter', function() {
+    //     clearInterval(interval);
+    //   });
+
+      prevButton.addEventListener('mouseenter', function() {
+        clearInterval(interval);
+      });
+
+      nextButton.addEventListener('mouseenter', function() {
+        clearInterval(interval);
+      });
+
+      // Tiếp tục chuyển đổi banner khi di chuột ra khỏi banner
+      banner.addEventListener('mouseleave', function() {
+        interval = setInterval(nextBanner, 3000);
+      });
+    });
+  </script>

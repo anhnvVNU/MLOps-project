@@ -104,7 +104,7 @@
 						<div id="paypal-button-container">
 
 						</div>
-						<button onclick="makePayment()">Thanh toán</button>
+						<button class="btn  btn-primary btn-block" onclick="makePayment()">Thanh toán Khi nhận hàng </button>
 						<a href="{% url 'store' %}" class="btn btn-light btn-block">Continue Shopping</a>
 					</div>
 					<!-- card-body.// -->
@@ -207,7 +207,7 @@
     var url = "{% url 'payments' %}";
     var csrfToken = getCookie('csrftoken');
     var orderID = "{{ order.order_number }}";
-    var paymentMethod = 'PayPal';
+    var paymentMethod = 'COD';
     var redirectUrl = "{% url 'order_complete' %}";
 
     function makePayment() {
@@ -217,7 +217,7 @@
             data: {
                 'csrfmiddlewaretoken': csrfToken,
                 'orderID': orderID,
-				'transID': '123',
+				'transID': orderID,
                 'payment_method': paymentMethod,
                 'status': 'Completed', // Giả sử giao dịch được đánh dấu là đã hoàn thành ngay khi nhấn nút
             },

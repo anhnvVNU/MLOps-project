@@ -1,0 +1,457 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>cart</title>
+    <meta property="og:title" content="cart - Good Natured Quiet Wasp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Noto Sans;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-theme-neutral-dark);
+        background-color: var(--dl-color-theme-neutral-light);
+
+        fill: var(--dl-color-theme-neutral-dark);
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/animate.css@4.1.1/animate.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css"
+    />
+    <style>
+      [data-thq="thq-dropdown"]:hover > [data-thq="thq-dropdown-list"] {
+          display: flex;
+        }
+
+        [data-thq="thq-dropdown"]:hover > div [data-thq="thq-dropdown-arrow"] {
+          transform: rotate(90deg);
+        }
+    </style>
+  </head>
+
+  <!-- end head -->
+
+  <!-- start body -->
+  <body>
+    <link rel="stylesheet" href="{% static 'css/manh-style.css' %}" />
+    <div>
+      <link href="{% static 'css/manh-cart.css' %}" rel="stylesheet" />
+
+      <!-- bắt đầu toàn bộ -->
+      <div class="cart-container">
+        <div class="cart-container01">
+          <div class="cart-container02">
+            <div class="cart-container03">
+              <img
+                alt="facebook"
+                src="{% static './images/logo-facebook.png' %}"
+                class="cart-image"
+              />
+              <a
+                href="https://example.com"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="cart-link link-nav"
+              >
+                <span>facebook</span>
+                <br />
+              </a>
+              <img
+                alt="instagram"
+                src="{% static './images/logo-instagram.png' %}"
+                class="cart-image1"
+              />
+              <a
+                href="https://example.com"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="cart-link1 link-nav"
+              >
+                instagram
+              </a>
+              <div class="cart-container04">
+                {% if user.id is not None %}
+                <span style="font-style: italic;" class="link-nav">Chào mừng bạn {{ user.first_name }} đến với chúng tôi!</span>
+                {% else %}
+                <span style="font-style: italic;" class="link-nav">Hãy tham gia để khám phá điều thú vị</span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="cart-container05">
+              <img
+                alt="email"
+                src="{% static './images/logo-email.png' %}"
+                class="cart-image2"
+              />
+              <a
+                href="https://example.com"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="cart-link2 link-nav"
+              >
+                Email
+              </a>
+              <img
+                alt="image"
+                src="{% static './images/logo-telephone.png' %}"
+                class="cart-image3"
+              />
+              <a
+                href="https://example.com"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="cart-link3 link-nav"
+              >
+                Call us
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="cart-container06">
+          <div class="cart-container07">
+            <a href="{% url 'home' %}" target="_self" rel="noreferrer noopener" class="cart-container08">
+              <img
+                alt="logo"
+                src="{% static './images/name.png' %}"
+                class="cart-image4"
+              />
+            </a>
+            <div class="cart-container09">
+              <div data-thq="thq-dropdown" class="cart-thq-dropdown list-item">
+                <div
+                  data-thq="thq-dropdown-toggle"
+                  class="cart-dropdown-toggle"
+                >
+                  <span class="cart-text03">Category</span>
+                  <div
+                    data-thq="thq-dropdown-arrow"
+                    class="cart-dropdown-arrow"
+                  >
+                    <svg viewBox="0 0 1024 1024" class="cart-icon">
+                      <path d="M426 726v-428l214 214z"></path>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- drop down danh mục-->
+
+                <ul data-thq="thq-dropdown-list" class="cart-dropdown-list">
+
+                  <li data-thq="thq-dropdown" class="cart-dropdown list-item">
+                    <div
+                      data-thq="thq-dropdown-toggle"
+                      class="cart-dropdown-toggle1"
+                    >
+                      <a class="cart-text04" href = "{% url 'store' %}">Tất cả</a>
+                    </div>
+                  </li>
+
+                  {% for category in links %}
+
+                  <li data-thq="thq-dropdown" class="cart-dropdown1 list-item">
+                    <div
+                      data-thq="thq-dropdown-toggle"
+                      class="cart-dropdown-toggle2"
+                    >
+                      <a class="cart-text05" href = "{{ category.get_url }}">{{ category.category_name }}</a>
+                    </div>
+                  </li>
+                  
+                  {% endfor %}
+
+                </ul>
+
+                <!-- end dropdown -->
+
+              </div>
+            </div>
+
+            <!-- click store -->
+            <div class="cart-container10">
+              <a href="{% url 'store' %}" class="cart-button button" style="text-align: center;">Store</a>
+            </div>
+            <!-- end click store -->
+
+            <!-- Tìm kiếm -->
+            <form action="{% url 'search' %}" class="cart-container11" method="GET">
+                <input
+                  type="text"
+                  placeholder="Search"
+                  class="cart-textinput input"
+                  name="q" value="{{ q }}"
+                />
+                <button type="submit" class="cart-button1 button">
+                  Tìm
+                </button>
+
+            </form>
+            <!-- end tìm kiếm -->
+
+            <!-- đăng xuất -->
+            <div class="cart-container12">
+              {% if user.id is not None %}
+              <a
+                href="{% url 'logout' %}"
+                target="_self"
+                rel="noreferrer noopener"
+                class="cart-link4"
+              >
+                Đăng xuất
+              </a>
+              {% else %}
+              <a
+                href="{% url 'login' %}"
+                target="_self"
+                rel="noreferrer noopener"
+                class="home-chua-dang-nhap-link"
+              >
+                <strong>Log in</strong>
+              </a>
+              <a
+                href="{% url 'register' %}"
+                target="_self"
+                rel="noreferrer noopener"
+                class="home-chua-dang-nhap-link"
+              >
+                <strong>Sign in</strong>
+              </a>
+              {% endif %}
+              <a
+                href="{% url 'cart' %}"
+                target="_self"
+                rel="noreferrer noopener"
+              >
+                <img
+                  alt="cart"
+                  src="{% static './images/cart.png' %}"
+                  class="cart-image5"
+                >
+                  <div class="badge">3</div>
+                </img>
+                <!-- <div class="badge">3</div> -->
+              </a>
+            </div>
+            <!-- end đăng xuất -->
+
+          </div>
+        </div>
+
+        <!-- kết thúc nav -->
+        
+        <!-- content -->
+        <div class="cart-container13">
+          <div class="cart-container14">
+            {% if user.id is not None and cart_items %}
+            <div class="cart-container15">
+              <div class="cart-container16"><span>Sản phẩm</span></div>
+              <div class="cart-container17"><span>Số lượng</span></div>
+              <div class="cart-container18"><span>Đơn giá</span></div>
+              <div class="cart-container19"><span>Thành tiền</span></div>
+            </div>
+            {% endif %}
+            {% if user.id is not None and cart_items%}
+            <div class="cart-container20">
+            {% else %}
+
+            <div class="cart-container20" 
+            style="
+            overflow-y: hidden;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            ">
+
+            {% endif %}
+              <!-- each product -->
+              {% if user.id is not None and cart_items %}
+              {% for cart_item in cart_items %}
+              <div class="cart-container21">
+                <!-- ảnh tên sp -->
+                <div class="cart-container22">
+                  <a href="{{ cart_item.product.get_url }}" class="cart-image6">
+                    <img
+                      alt="product"
+                      src="{{ cart_item.product.images.url }}"
+                      width="100%"
+                      height="100%"
+                    />
+                  </a>
+                  <div class="cart-container23">
+                    <div class="cart-container24">
+                      <span>{{ cart_item.product.product_name }}</span>
+                    </div>
+                    <div class="cart-container25">
+                      <p class="text-muted small">
+												{% if cart_item.variations.all %}
+												{% for variation in cart_item.variations.all %}
+												{{ variation.variation_category | capfirst }}: {{ variation.variation_value }}
+												<br />
+												{% endfor %}
+												{% endif %}
+											</p>
+                    </div>
+                  </div>
+                </div>
+                <!-- end ảnh tên sp -->
+
+                <div class="cart-container26">
+                  <!-- giảm -->
+                  <a
+                    href="{% url 'remove_cart' cart_item.product.id cart_item.id %}"
+                    target="_self"
+                    type="button"
+                    class="cart-link5"
+                  >
+                    <span class="minus">-</span>
+                    <br />
+                    <br />
+                  </a>
+
+                  <!-- nhập số lượng vào -->
+                  <input
+                    type="text"
+                    class="cart-textinput1 input"
+                    value="{{ cart_item.quantity }}"
+                  />
+
+                  <!-- tăng -->
+                  <form action="{% url 'add_cart' cart_item.product.id %}" class="cart-link6" method="post">
+                    {% csrf_token %}
+                    {% for variation in cart_item.variations.all %}
+                    <input type="hidden" name="{{ variation.variation_category | lower }}"
+                      value="{{ variation.variation_value | capfirst }}">
+                    {% endfor %}
+                    <button class="sub-cart-link6" type="submit">
+                      +
+                    </button>
+                  </form>
+                  
+
+                </div>
+                <div class="cart-container27">
+                  <span>
+                    <span>${{ cart_item.product.price }}</span>
+                    <br />
+                  </span>
+                </div>
+                <div class="cart-container28">
+                  <span>
+                    <span>${{ cart_item.sub_total }}</span>
+                    <br />
+                  </span>
+                </div>
+                <div class="cart-container29">
+
+                  <a href="{% url 'remove_cart_item' cart_item.product.id cart_item.id %}"
+										class="cart-link7" onclick="return confirm('Are you sure?')">
+										Loại bỏ</a>
+
+                </div>
+              </div>
+              <div class="pad"></div>
+              {% endfor %}
+              {% elif user.id is None %}
+
+              <strong>Đăng nhập hoặc đăng kí để hưởng những ưu đãi siêu khủng!</strong>
+              {% else %}
+              <strong>Giỏ hàng trống!</strong>
+
+              {% endif %}
+              
+              <!-- end each product -->
+
+            </div>
+          </div>
+          <div class="cart-container30">
+            {% if user.id is not None %}
+            <div class="cart-container31">
+              <div class="cart-container32">
+                <div class="cart-container33"><span>Tổng :</span></div>
+                <div class="cart-container34"><span>Thuế :</span></div>
+                <div class="cart-container35"><span>Tổng tiền :</span></div>
+              </div>
+              <div class="cart-container36">
+                <div class="cart-container37">
+                  <span>
+                    <span>${{ total }}</span>
+                    <br />
+                  </span>
+                </div>
+                <div class="cart-container38">
+                  <span>
+                    <span>${{ tax }}</span>
+                    <br />
+                  </span>
+                </div>
+                <div class="cart-container39"><strong>${{ grand_total }}</strong></div>
+              </div>
+              <div class="cart-container40">
+                
+                
+                <a
+                  href="{% url 'checkout' %}"
+                  target="_self"
+                  rel="noreferrer noopener"
+                  class="cart-button2 button"
+                >Thanh toán</a>
+
+
+                <div class="pad"></div>
+
+                
+                <a
+                  href="{% url 'store' %}"
+                  target="_self"
+                  rel="noreferrer noopener"
+                  class="cart-button3 button"
+                >Mua tiếp</a>
+
+                
+
+              </div>
+            </div>
+            {% else %}
+            <div style="height: 50%; width: 75%; align-items: center; justify-content: center; flex-direction: row;">
+              <span style="font-style: italic;">Có thể bạn chưa biết: </span>
+              <strong style="scroll-behavior: smooth;
+              scroll-snap-type: x mandatory;">Con gà có trước quả trứng</strong>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        <!-- end content -->
+      </div>
+      <!-- end toàn bộ -->
+    </div>
+  </body>
+</html>

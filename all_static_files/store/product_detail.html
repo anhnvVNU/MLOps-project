@@ -32,20 +32,20 @@
                             <hr />
                             {% if single_product.stock > 0 %} {% if in_cart %}
                             <button type="submit" class="btn btn-success">
-                                <span class="text">Add to cart</span>
+                                <span class="text">Thêm vào giỏ</span>
                                 <i class="fas fa-check"></i>
                             </button>
                             <a href="{% url 'cart' %}" class="btn btn-outline-primary">
-                                <span class="text">Show cart</span>
+                                <span class="text">Hiện giỏ hàng</span>
                                 <i class="fas fa-eye"></i>
                             </a>
                             {% else %}
                             <button type="submit" class="btn btn-warning">
-                                <span class="text">Add to cart</span>
+                                <span class="text">Thêm vào giỏ</span>
                                 <i class="fas fa-shopping-cart"></i>
                             </button>
                             {% endif %} {% else %}
-                            <h5 class="text-danger">Out of Stock</h5>
+                            <h5 class="text-danger">Hết hàng</h5>
                             {% endif %}
                         </article>
                         <!-- product-info-aside .// -->
@@ -62,10 +62,10 @@
             <div class="col-md-9">
                 <form action="{% url 'submit_review' single_product.id %}" method="POST">
                     {% csrf_token %}
-                    <h5>Write your review</h5>
+                    <h5>Bình luận</h5>
                     <div>
                         {% include "includes/alerts.html" %}
-                        <label>How do you rate this product?</label>
+                        <label>Bạn đánh giá sản phẩm này thế nào?</label>
                         <br>
                         <div class="rate">
                             <input type="radio" name="rating" id="rating10" value="5" required /><label for="rating10"
@@ -90,28 +90,27 @@
                                 title="0.5" class="half"></label>
                         </div>
                         <br>
-                        Review title:
+                        Tiêu đề:
                         <input type="text" class="form-control" name="subject">
                         <br>
-                        Review
+                        Nội dung
                         <textarea name="review" rows="4" class="form-control"></textarea>
                         <br>
-
                         {% if user.is_authenticated %}
-                        <!-- {% if orderproduct %} -->
-                        <input type="submit" value="Submit Review" class="btn btn-warning">
-                        <!-- {% else %}
+                            <!-- {% if orderproduct %} -->
+                            <input type="submit" value="Submit Review" class="btn btn-primary">
+                            <!-- {% else %}
                             <p>You must purchase this product to post a review.</p>
                             {% endif %} -->
                         {% else %}
-                        <p>You must be logged in to post a review. <span><a href="{% url 'login' %}">Login
+                        <p>Bạn cần đăng nhập để đăng bình luận. <span><a href="{% url 'login' %}">Login
                                     now</a></span></p>
                         {% endif %}
                     </div>
                 </form>
                 <br>
                 <header class="section-heading">
-                    <h3>Customer Reviews</h3>
+                    <h3>Nhận xét khách hàng</h3>
                 </header>
                 {% for review in reviews %}
                 <article class="box mb-3">

@@ -1287,8 +1287,8 @@ a[class*=card]:hover .title {
   opacity: 0;
 }
 .checkbox-btn input:checked ~ .btn {
-  border-color: #3167eb;
-  background-color: #3167eb;
+  border-color: #ff9017;
+  background-color: #ff9017;
   color: #fff;
 }
 
