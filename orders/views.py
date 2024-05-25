@@ -3,10 +3,12 @@ from django.http import JsonResponse
 from carts.models import CartItem
 from .forms import OrderForm
 import datetime
-from .models import Order, Payment, OrderProduct
-from store.models import Product
+from .models import Order, Payment, OrderBook
+from store.models import Book
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
+from django.utils import timezone
+from datetime import timedelta
 
 
 def sendEmail(request, order):
@@ -49,26 +51,28 @@ def payments(request):
             # Chuyển hết cart_item thành order_product
             cart_items = CartItem.objects.filter(user=request.user)
             for item in cart_items:
-                order_product = OrderProduct()
-                order_product.order_id = order.id
-                order_product.payment = payment
-                order_product.user_id = request.user.id
-                order_product.product_id = item.product_id
-                order_product.quantity = item.quantity
-                order_product.product_price = item.product.price
-                order_product.ordered = True
-                order_product.save()
+                order_book = OrderBook()
+                order_book.order_id = order.id
+                order_book.payment = payment
+                order_book.user_id = request.user.id
+                order_book.book_id = item.book_id
+                order_book.quantity = item.quantity
+                order_book.book_price = item.book.price
+                order_book.ordered = True
+                order_book.expiry_date = timezone.now() + timedelta(days=30)
+                order_book.save()
 
                 cart_item = CartItem.objects.get(id=item.id)
-                product_variation = cart_item.variations.all()
-                order_product = OrderProduct.objects.get(id=order_product.id)
-                order_product.variations.set(product_variation)
-                order_product.save()
+                # book_variation = cart_item.variations.all()
+                order_book = OrderBook.objects.get(id=order_book.id)
+                # order_book.variations.set(book_variation)
+                order_book.save()
 
-                # Reduce the quantity of the sold products
-                product = Product.objects.get(id=item.product_id)
-                product.stock -= item.quantity
-                product.save()
+                # Reduce the quantity of the sold books
+                book = Book.objects.get(id=item.book_id)
+
+                book.stock -= item.quantity
+                book.save()                
 
             # # Xóa hết cart_item
             CartItem.objects.filter(user=request.user).delete()
@@ -98,7 +102,7 @@ def place_order(request, total=0, quantity=0,):
     grand_total = 0
     tax = 0
     for cart_item in cart_items:
-        total += (cart_item.product.price * cart_item.quantity)
+        total += (cart_item.book.price * cart_item.quantity)
         quantity += cart_item.quantity
     tax = (2 * total) / 100
     grand_total = total + tax
@@ -152,17 +156,17 @@ def order_complete(request):
 
     try:
         order = Order.objects.get(order_number=order_number, is_ordered=True)
-        ordered_products = OrderProduct.objects.filter(order_id=order.id)
+        ordered_books = OrderBook.objects.filter(order_id=order.id)
 
         subtotal = 0
-        for i in ordered_products:
-            subtotal += i.product_price * i.quantity
+        for i in ordered_books:
+            subtotal += i.book_price * i.quantity
 
         payment = Payment.objects.get(payment_id=transID)
 
         context = {
             'order': order,
-            'ordered_products': ordered_products,
+            'ordered_books': ordered_books,
             'order_number': order.order_number,
             'transID': payment.payment_id,
             'payment': payment,

@@ -130,18 +130,18 @@ a {
     background-color: #c1c1c1;
 }
 
-.col .product{
+.col .movie{
     width: 100%;
     text-align: center;
 }
 
-.col .product .btn-update-cart {
+.col .movie .btn-update-cart {
     float: left;
     width: 50%;
     font-size: 17px;
 }
 
-.col .product .btn-view {
+.col .movie .btn-view {
     float: right;
     width: 50%;
     font-size: 17px;

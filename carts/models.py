@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-from store.models import Product, Variation
+from store.models import Book
 
 
 class Cart(models.Model):
@@ -14,14 +14,13 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    variations = models.ManyToManyField(Variation, blank=True)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, default=1) 
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, null=True)
     quantity = models.IntegerField()
     is_active = models.BooleanField(default=True)
 
     def sub_total(self):
-        return self.quantity * self.product.price
+        return self.quantity * self.book.price
 
     def __unicode__(self):
-        return self.product
+        return self.book

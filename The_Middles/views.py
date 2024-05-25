@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from store.models import Product
+from store.models import Book
 
 def home(request):
-    products = Product.objects.all().filter(is_available=True)
+    books = Book.objects.all().filter()
     context = {
-        'products': products,
+        'books': books,
     }
     return render(request, 'home.html', context=context)

@@ -1,38 +1,25 @@
 from django.contrib import admin
-from .models import Product, Variation, ReviewRating, Movie, Actor, CastCredit
+from .models import Variation, ReviewRating, Book, Author, AuthorCredit
 
-
-class ProductAdmin(admin.ModelAdmin):
-    list_display = ('product_name', 'price', 'stock', 'category', 'created_date', 'modified_date', 'is_available')
-    prepopulated_fields = {'slug': ('product_name',)}
-
-
-class VariationAdmin(admin.ModelAdmin):
-    list_display = ('product', 'variation_category', 'variation_value', 'is_active', 'created_date')
-    list_editable = ('is_active',)   # Cho phép chỉnh sửa trên list hiển thị
-    list_filter = ('product', 'variation_category', 'variation_value')
-
-class MovieAdmin(admin.ModelAdmin):
-    list_display = ('title', 'budget', 'release_date', 'popularity', 'vote_average')
+class BookAdmin(admin.ModelAdmin):
+    list_display = ('title', 'stock')
     list_filter = ('release_date',)
     search_fields = ('title',)
     date_hierarchy = 'release_date'
-    prepopulated_fields = {'homepage': ('title',)}
+    prepopulated_fields = {'slug': ('title',)}
 
-class CastCreditAdmin(admin.ModelAdmin):
-    list_display = ('movie_title', 'actor_name','character_name','gender')  # Sử dụng các phương thức đã định nghĩa
+class AuthorCreditAdmin(admin.ModelAdmin):
+    list_display = ('book_title', 'author_name')  # Sử dụng các phương thức đã định nghĩa
 
-    def movie_title(self, obj):
-        return obj.movie.title
-    movie_title.short_description = 'Movie Title'
+    def book_title(self, obj):
+        return obj.book.title
+    book_title.short_description = 'Book Title'
 
-    def actor_name(self, obj):
-        return obj.actor.name
-    actor_name.short_description = 'Actor Name'
+    def author_name(self, obj):
+        return obj.author.name
+    author_name.short_description = 'Author Name'
     
-admin.site.register(Product, ProductAdmin)
-admin.site.register(Variation, VariationAdmin)
 admin.site.register(ReviewRating)
-admin.site.register(Movie, MovieAdmin)
-admin.site.register(Actor)
-admin.site.register(CastCredit, CastCreditAdmin)
+admin.site.register(Book, BookAdmin)
+admin.site.register(Author)
+admin.site.register(AuthorCredit, AuthorCreditAdmin)

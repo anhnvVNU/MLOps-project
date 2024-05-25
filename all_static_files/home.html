@@ -7,7 +7,7 @@
     <div class="container">
         <div class="intro-banner-wrap">
             {% include "includes/alerts.html" %}
-            <img src="{% static 'images/banners/book.jpg' %}" class="img-fluid rounded">
+            <img src="{% static 'images/banners/cover.png' %}" class="img-fluid rounded">
         </div>
 
     </div> <!-- container //  -->
@@ -22,13 +22,13 @@
             <h3 class="section-title">Popular books</h3>
         </header><!-- sect-heading -->
         <div class="row">
-            {% for product in products %}
+            {% for book in books %}
             <div class="col-md-3">
-                <div class="card card-product-grid">
-                    <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+                <div class="card card-movie-grid">
+                    <a href="{{ book.get_url }}" class="img-wrap"> <img src="{{ book.image_urls }}"> </a>
                     <figcaption class="info-wrap">
-                        <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
-                        <div class="price mt-1">${{ product.price }}</div> <!-- price-wrap.// -->
+                        <a href="{{ book.get_url }}" class="title">{{ book.title }}</a>
+                        <div class="price mt-1">${{ book.price }}</div> <!-- price-wrap.// -->
                     </figcaption>
                 </div>
             </div> <!-- col.// -->

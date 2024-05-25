@@ -1,7 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import User
-from store.models import Product, Variation
+from store.models import Book, Variation
 
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -43,6 +43,7 @@ class Order(models.Model):
     is_ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    expiry_date =  models.DateTimeField(auto_now=True)
 
     def full_name(self):
         return "{0} {1}".format(self.first_name, self.last_name)
@@ -54,17 +55,19 @@ class Order(models.Model):
         return self.first_name
 
 
-class OrderProduct(models.Model):
+class OrderBook(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     payment = models.ForeignKey(Payment, on_delete=models.SET_NULL, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, default=1)
     variations = models.ManyToManyField(Variation, blank=True)
     quantity = models.IntegerField()
-    product_price = models.FloatField()
+    book_price = models.FloatField()
     ordered = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    expiry_date =  models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.product.product_name
+        return self.book.title
+

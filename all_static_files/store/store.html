@@ -5,7 +5,11 @@
 <!-- ========================= SECTION PAGETOP ========================= -->
 <section class="section-pagetop bg">
 	<div class="container">
-		<h2 class="title-page">Our Store</h2>
+		{% if slug %}
+		<h2 class="title-page">Search results...</h2>
+		{% else %}
+		<h2 class="title-page">Our bookstore</h2>
+		{% endif %}
 	</div>
 	<!-- container //  -->
 </section>
@@ -16,104 +20,282 @@
 		<div class="row">
 			<aside class="col-md-3">
 				<div class="card">
-					<article class="filter-group">
-						<header class="card-header">
-							<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
-								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">Categories</h6>
-							</a>
-						</header>
-						<div class="filter-content collapse show" id="collapse_1">
-							<div class="card-body">
-								<ul class="list-menu">
-									<li><a href="{% url 'store' %}">All products</a></li>
-									{% for category in links %}
-									<li>
-										<a href="{{ category.get_url }}">{{ category.category_name }}</a>
-									</li>
-									{% endfor %}
-								</ul>
+					<form action="{% url 'sub_search' %}" class="search" method="GET">
+						
+						<article class="filter-group">
+							<header class="card-header">
+								<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true">
+									<i class="icon-control fa fa-chevron-down"></i>
+									<h6 class="title">Book Genre</h6>
+								</a>
+							</header>
+							<div class="filter-content collapse hide" id="collapse_1">
+								<div class="card-body">
+									<ul class="list-menu">
+										<li><a href="{% url 'store' %}">All books</a></li>
+										{% for category in links %}
+										<li>
+											<label>
+												{% if category.id in genre_ids %}
+												<input type="checkbox" name="genre" value="{{ category.id }}" checked>
+												{% else %}
+												<input type="checkbox" name="genre" value="{{ category.id }}">
+												{% endif %}
+												{{ category.category_name }}
+											</label>
+										</li>
+										{% endfor %}
+									</ul>
+								</div>
 							</div>
-							<!-- card-body.// -->
-						</div>
-					</article>
-					<!-- filter-group  .// -->
-					<article class="filter-group">
-						<header class="card-header">
-							<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true" class="">
-								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">Sizes</h6>
-							</a>
-						</header>
-						<div class="filter-content collapse show" id="collapse_4">
-							<div class="card-body">
-								<label class="checkbox-btn">
-									<input type="checkbox" />
-									<span class="btn btn-light"> XS </span>
-								</label>
+						</article>
 
-								<label class="checkbox-btn">
-									<input type="checkbox" />
-									<span class="btn btn-light"> SM </span>
-								</label>
+						<!-- Search for author -->
 
-								<label class="checkbox-btn">
-									<input type="checkbox" />
-									<span class="btn btn-light"> LG </span>
-								</label>
-
-								<label class="checkbox-btn">
-									<input type="checkbox" />
-									<span class="btn btn-light"> XXL </span>
-								</label>
-							</div>
-							<!-- card-body.// -->
-						</div>
-					</article>
-					<!-- filter-group .// -->
-
-					<article class="filter-group">
-						<header class="card-header">
-							<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
-								<i class="icon-control fa fa-chevron-down"></i>
-								<h6 class="title">Price range</h6>
-							</a>
-						</header>
-						<div class="filter-content collapse show" id="collapse_3">
-							<div class="card-body">
-								<div class="form-row">
-									<div class="form-group col-md-6">
-										<label>Min</label>
-										<!-- <input class="form-control" placeholder="$0" type="number"> -->
-										<select class="mr-2 form-control">
-											<option value="0">$0</option>
-											<option value="50">$50</option>
-											<option value="100">$100</option>
-											<option value="150">$150</option>
-											<option value="200">$200</option>
-											<option value="500">$500</option>
-											<option value="1000">$1000</option>
-										</select>
-									</div>
-									<div class="form-group text-right col-md-6">
-										<label>Max</label>
-										<select class="mr-2 form-control">
-											<option value="50">$50</option>
-											<option value="100">$100</option>
-											<option value="150">$150</option>
-											<option value="200">$200</option>
-											<option value="500">$500</option>
-											<option value="1000">$1000</option>
-											<option value="2000">$2000+</option>
-										</select>
+						<article class="filter-group">
+							<header class="card-header">
+								<a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true">
+									<i class="icon-control fa fa-chevron-down"></i>
+									<h6 class="title">Author</h6>
+								</a>
+							</header>
+							<div class="filter-content collapse show" id="collapse_2">
+								<div class="card-body">
+									<!--  -->
+									<div class="input-group w-100">
+										<input type="text" class="form-control" style="width:60%;" placeholder="Search" name="author" value="{{ author }}">
+										<div class="input-group-append">
+											
+										</div>
 									</div>
 								</div>
-								<!-- form-row.// -->
-								<button class="btn btn-block btn-primary">Apply</button>
 							</div>
-							<!-- card-body.// -->
-						</div>
-					</article>
+						</article>
+
+						<!-- end searh for author -->
+
+						<!-- Search for Relase Data -->
+
+						<article class="filter-group">
+							<header class="card-header">
+								<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true">
+									<i class="icon-control fa fa-chevron-down"></i>
+									<h6 class="title">Release Date</h6>
+								</a>
+							</header>
+							<div class="filter-content collapse show" id="collapse_3">
+								<div class="card-body">
+									<div class="form-row mt-3">
+										<div class="form-group col-md-12">
+											<label for="release_date_min">From</label>
+											<input type="date" class="form-control" id="release_date_min" name="release_date_min" 
+											value="{{ release_date_min }}">
+											<label for="release_date_max">To</label>
+											<input type="date" class="form-control" id="release_date_max" name="release_date_max"
+											value="{{ release_date_max }}">
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+					
+						<article class="filter-group">
+							<header class="card-header">
+								<a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true">
+									<i class="icon-control fa fa-chevron-down"></i>
+									<h6 class="title">Rating</h6>
+								</a>
+							</header>
+							<div class="filter-content collapse show" id="collapse_4">
+								<div class="card-body">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Min</label>
+											<select class="form-control" name="min_rating">
+												{% if min_rating is None or min_rating == 1 %}
+												<option value="1" selected>1</option>
+												{% else %}
+												<option value="1">1</option>
+												{% endif %}
+
+												
+												{% if min_rating == 2 %}
+												<option value="2" selected>2</option>
+												{% else %}
+												<option value="2">2</option>
+												{% endif %}
+
+												{% if min_rating == 3 %}
+												<option value="3" selected>3</option>
+												{% else %}
+												<option value="3">3</option>
+												{% endif %}
+
+												{% if min_rating == 4 %}
+												<option value="4" selected>4</option>
+												{% else %}
+												<option value="4">4</option>
+												{% endif %}
+
+												{% if min_rating == 5 %}
+												<option value="5" selected>3</option>
+												{% else %}
+												<option value="5">5</option>
+												{% endif %}
+											</select>
+										</div>
+										
+										<div class="form-group col-md-6">
+											<label>Max</label>
+											<select class="form-control" name="max_rating">
+												{% if max_rating == 1 %}
+												<option value="1" selected>1</option>
+												{% else %}
+												<option value="1">1</option>
+												{% endif %}
+
+												
+												{% if max_rating == 2 %}
+												<option value="2" selected>2</option>
+												{% else %}
+												<option value="2">2</option>
+												{% endif %}
+
+												{% if max_rating == 3 %}
+												<option value="3" selected>3</option>
+												{% else %}
+												<option value="3">3</option>
+												{% endif %}
+
+												{% if max_rating == 4 %}
+												<option value="4" selected>4</option>
+												{% else %}
+												<option value="4">4</option>
+												{% endif %}
+
+												{% if max_rating is None or max_rating == 5 %}
+												<option value="5" selected>5</option>
+												{% else %}
+												<option value="5">5</option>
+												{% endif %}
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
+					
+						<article class="filter-group">
+							<header class="card-header">
+								<a href="#" data-toggle="collapse" data-target="#collapse_5" aria-expanded="true">
+									<i class="icon-control fa fa-chevron-down"></i>
+									<h6 class="title">Price range</h6>
+								</a>
+							</header>
+							<div class="filter-content collapse show" id="collapse_5">
+								<div class="card-body">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label>Min</label>
+											<select class="form-control" name="min_price">
+												{% if min_price is None or min_price == 0 %}
+												<option value="0" selected>$0</option>
+												{% else %}
+												<option value="0">$0</option>
+												{% endif %}
+												
+												{% if min_price == 50 %}
+												<option value="50" selected>$50</option>
+												{% else %}
+												<option value="50">$50</option>
+												{% endif %}
+								
+												{% if min_price == 100 %}
+												<option value="100" selected>$100</option>
+												{% else %}
+												<option value="100">$100</option>
+												{% endif %}
+								
+												{% if min_price == 200 %}
+												<option value="200" selected>$200</option>
+												{% else %}
+												<option value="200">$200</option>
+												{% endif %}
+								
+												{% if min_price == 500 %}
+												<option value="500" selected>$500</option>
+												{% else %}
+												<option value="500">$500</option>
+												{% endif %}
+								
+												{% if min_price == 1000 %}
+												<option value="1000" selected>$1000</option>
+												{% else %}
+												<option value="1000">$1000</option>
+												{% endif %}
+								
+												{% if min_price == 2000 %}
+												<option value="2000" selected>$2000</option>
+												{% else %}
+												<option value="2000">$2000</option>
+												{% endif %}
+											</select>
+										</div>
+										<div class="form-group col-md-6">
+											<label>Max</label>
+											<select class="form-control" name="max_price">
+												{% if max_price == 0 %}
+												<option value="0" selected>$0</option>
+												{% else %}
+												<option value="0">$0</option>
+												{% endif %}
+												
+												{% if max_price == 50 %}
+												<option value="50" selected>$50</option>
+												{% else %}
+												<option value="50">$50</option>
+												{% endif %}
+								
+												{% if max_price == 100 %}
+												<option value="100" selected>$100</option>
+												{% else %}
+												<option value="100">$100</option>
+												{% endif %}
+								
+												{% if max_price == 200 %}
+												<option value="200" selected>$200</option>
+												{% else %}
+												<option value="200">$200</option>
+												{% endif %}
+								
+												{% if max_price == 500 %}
+												<option value="500" selected>$500</option>
+												{% else %}
+												<option value="500">$500</option>
+												{% endif %}
+								
+												{% if max_price == 1000 %}
+												<option value="1000" selected>$1000</option>
+												{% else %}
+												<option value="1000">$1000</option>
+												{% endif %}
+								
+												{% if max_price is None or max_price == 100000 %}
+												<option value="100000" selected>$2000+</option>
+												{% else %}
+												<option value="100000">$2000+</option>
+												{% endif %}
+											</select>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+						</article>
+						<button class="btn btn-block btn-primary" type="submit">Apply</button>
+						<a href="/store" class="btn btn-block btn-secondary" type="submit">Reset</a>
+					</form>
+					
 					<!-- filter-group .// -->
 				</div>
 				<!-- card.// -->
@@ -122,42 +304,42 @@
 			<main class="col-md-9">
 				<header class="border-bottom mb-4 pb-3">
 					<div class="form-inline">
-						<span class="mr-md-auto">Found <b>{{ product_count }}</b> Items found
+						<span class="mr-md-auto">Found <b>{{ book_count }}</b> Items found
 						</span>
 					</div>
 				</header>
 				<!-- sect-heading -->
 
 				<div class="row">
-					{% for product in products %}
+					{% for book in books %}
 					<div class="col-md-4">
-						<figure class="card card-product-grid">
+						<figure class="card card-movie-grid">
 							<div class="img-wrap">
-								<img src="{{ product.images.url }}" />
+								<img src="{{ book.image_urls }}" />
 							</div>
 							<figcaption class="info-wrap">
 								<div class="fix-height">
-									<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+									<a href="{{ book.get_url }}" class="title">{{ book.title }}</a>
 									<div class="price-wrap mt-2">
-										<span class="price">${{ product.price }}</span>
+										<span class="price">${{ book.price }}</span>
 									</div>
 								</div>
-								<a href="{{ product.get_url }}" class="btn btn-block btn-warning">View detail</a>
+								<a href="{{ book.get_url }}" class="btn btn-block btn-warning">View detail</a>
 							</figcaption>
 						</figure>
 					</div>
 					{% endfor %}
 				</div>
-				{% if products %}
+				{% if books %}
 				<nav class="mt-4" aria-label="Page navigation sample">
 					<ul class="pagination">
-						{% if products.has_previous %}
+						{% if books.has_previous %}
 						<li class="page-item">
 							<a class="page-link" href="{% url 'store' %}?page=1">First</a>
 						</li>
 						<li class="page-item">
 							<a class="page-link"
-								href="{% url 'store' %}?page={{products.previous_page_number}}">Previous</a>
+								href="{% url 'store' %}?page={{books.previous_page_number}}">Previous</a>
 						</li>
 						{% else %}
 						<li class="page-item disabled">
@@ -167,14 +349,14 @@
 							<a class="page-link" href="#">Previous</a>
 						</li>
 						{% endif %}
-						{% if products.number|add:'-2' >= 1 %}
+						{% if books.number|add:'-2' >= 1 %}
 						<li class="page-item">
-							<a class="page-link" href="{% url 'store' %}?page={{ products.number|add:'-2' }}">&hellip;</a>
+							<a class="page-link" href="{% url 'store' %}?page={{ books.number|add:'-2' }}">&hellip;</a>
 						</li>
 						{% endif %}
-						{% for page in products.paginator.page_range %}
-						{% if products.number|add:'-1' <= page and page <= products.number|add:'1' %}
-						{% if page == products.number %}
+						{% for page in books.paginator.page_range %}
+						{% if books.number|add:'-1' <= page and page <= books.number|add:'1' %}
+						{% if page == books.number %}
 						<li class="page-item active">
 							<a class="page-link" href="{% url 'store' %}?page={{ page }}">{{ page }}</a>
 						</li>
@@ -185,18 +367,18 @@
 						{% endif %}
 						{% endif %}
 						{% endfor %}
-						{% if products.number|add:'2' <= products.paginator.num_pages %}
+						{% if books.number|add:'2' <= books.paginator.num_pages %}
 						<li class="page-item">
-							<a class="page-link" href="{% url 'store' %}?page={{ products.number|add:'2' }}">&hellip;</a>
+							<a class="page-link" href="{% url 'store' %}?page={{ books.number|add:'2' }}">&hellip;</a>
 						</li>
 						{% endif %}
-						{% if products.has_next %}
+						{% if books.has_next %}
 						<li class="page-item">
-							<a class="page-link" href="{% url 'store' %}?page={{products.next_page_number}}">Next</a>
+							<a class="page-link" href="{% url 'store' %}?page={{books.next_page_number}}">Next</a>
 						</li>
 						<li class="page-item">
 							<a class="page-link"
-								href="{% url 'store' %}?page={{ products.paginator.num_pages }}">Last</a>
+								href="{% url 'store' %}?page={{ books.paginator.num_pages }}">Last</a>
 						</li>
 						{% else %}
 						<li class="page-item disabled">

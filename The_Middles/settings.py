@@ -22,21 +22,22 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-# Quick-start development settings - unsuitable for production
+# Quick-start development settings - unsuitable for movieion
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep the secret key used in movieion secret!
 SECRET_KEY = 'django-insecure-+s_3n)33t=dr)dq@jzvog#y()iqkk1bbm$lwq14&&u%9#ogqm7'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on in movieion!
 DEBUG = True
 
 ALLOWED_HOSTS = [
   'localhost',
-  'book-store-vqbg.onrender.com',
+  'film-recommendation.onrender.com',
   "127.0.0.1"]
 
-CSRF_TRUSTED_ORIGINS = ["https://book-store-vqbg.onrender.com"]
+CSRF_TRUSTED_ORIGINS = ["https://film-recommendation.onrender.com",
+  "http://127.0.0.1"]
 
 
 # Application definition

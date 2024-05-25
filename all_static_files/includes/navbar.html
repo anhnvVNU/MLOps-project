@@ -15,6 +15,9 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link"> Vietnamese </a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link"> USD </a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav">
                     <li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
@@ -38,7 +41,7 @@
                             <i class="fa fa-bars"></i> All category
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'store' %}">All categories</a>
+                            <a class="dropdown-item" href="{% url 'store' %}">All books</a>
                             {% for category in links %}
                             <a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
                             {% endfor %}
