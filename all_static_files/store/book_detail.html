@@ -62,7 +62,7 @@
             <div class="col-md-9">
                 <form action="{% url 'submit_review' single_book.id %}" method="POST">
                     {% csrf_token %}
-                    <h5>Rate this film</h5>
+                    <h5>Rate this book</h5>
                     <div>
                         {% include "includes/alerts.html" %}
                         <div class="rate">
