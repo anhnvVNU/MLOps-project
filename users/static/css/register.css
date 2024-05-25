@@ -27,7 +27,7 @@ body {
 }
 
 .sign_up .welcome {
-    background-color: rgb(255, 0, 166);
+    background-color: rgb(234, 224, 191);
 
     width: 50%;
     height: inherit;
@@ -73,7 +73,7 @@ h3 {
 }
 
 .sign_up .content {
-    background-color: rgb(202, 202, 202);
+    background-color: rgb(234, 224, 191);
 
     width: 50%;
     height: inherit;
@@ -91,7 +91,7 @@ h3 {
 .content .title {
     font-family: "Hepta Slab Extra Bold";
     text-transform: uppercase;
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
     height: 33%;
     margin: 0 auto -30px;
@@ -134,7 +134,7 @@ form input:focus {
 }
 
 form .submit[type="submit"] {
-    background-color: #00b536;
+    background-color: #00ce3e;
     font-size: 20px;
     text-transform: uppercase;
     cursor: pointer;
@@ -143,7 +143,7 @@ form .submit[type="submit"] {
 }
 
 form .submit[type="submit"]:hover {
-    background-color: #00d23f;
+    background-color: #11db4d;
 }
 
 form .submit[type="submit"]:active {
