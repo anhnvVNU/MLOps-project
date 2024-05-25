@@ -33,10 +33,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
   'localhost',
-  'film-recommendation.onrender.com',
+  'book-store-vqbg.onrender.com',
   "127.0.0.1"]
 
-CSRF_TRUSTED_ORIGINS = ["https://film-recommendation.onrender.com",
+CSRF_TRUSTED_ORIGINS = ["https://book-store-vqbg.onrender.com",
   "http://127.0.0.1"]
 
 
